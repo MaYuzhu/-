@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <title>缅甸佛塔监测系统</title>
+    <style>
+        body {
+            background: #f6f6f6;
+            min-width: 1000px;
+        }
+        .content{
+            width: 1000px;
+            margin: 70px auto;
+            background: #fff;
+            padding-bottom: 16px;
+        }
+        .content>p{
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header_content">
+        <div class="header_left">
+            <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt="">缅甸佛塔监测系统</a></div>
+            <ul class="layui-nav layui-bg-blue" >
+                <li class="layui-nav-item"><a href="./monitor.html">监测数据</a></li>
+                <li class="layui-nav-item"><a href="./report_form.html">统计报表</a></li>
+                <li class="layui-nav-item layui-this"><a href="./alarm.html">监测报警</a></li>
+            </ul>
+        </div>
+        <div class="header_right">
+            <div style="display: none" class="user">用户名：<span></span></div>
+            <div class="logout"></div>
+            <ul class="language">
+                <li class="language_btn"><a href="#">中文</a></li>
+                <li class="language_btn"><a href="#" style="font-family: '微软雅黑 Light'">ENGLISH</a></li>
+                <li class="language_btn language_btn_right"><a href="#">မြန်မာ</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="content shadow">
+        <p>监测预警</p>
+        <hr>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>报警原因</th>
+                <th>报警处置</th>
+                <th>处置方案</th>
+                <th>报警时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            </tr>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+        <div style="text-align: center">无数据</div>
+        <hr>
+    </div>
+</body>
+<script src="./js/jquery-1.11.3.min.js"></script>
+<script src="./js/jquery.cookie.js"></script>
+<script src="./layui/layui.js"></script>
+<script src="./js/header.js"></script>
+<script type="module" src="./dist/despComponent.min.js"></script>
+</html>

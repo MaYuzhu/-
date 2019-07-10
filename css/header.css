@@ -1,0 +1,118 @@
+
+
+.header{
+    background: #1E9FFF;
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 999;
+}
+.header_content{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    background: #1E9FFF;
+}
+.header_left,.header_right{
+    display: flex;
+}
+.header_right{
+    align-items: center;
+}
+.logo a{
+    display: flex;
+    height: 100%;
+    background: #575351;
+    color: #e8e8e8;
+    padding:0 28px 0 10px;
+    align-items: center;
+}
+.logo img{
+    width: 46px;
+    height: 46px;
+}
+.user{
+    color: #f0f0f0;
+    margin-right: 10px;
+}
+.logout{
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid rgba(195, 195, 195, 0.85);
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 20px;
+    color: #eee;
+    cursor: pointer;
+}
+.logout:hover{
+    color: #fff;
+    border: 1px solid #1E9FFF;
+    box-shadow: 0px 0px 14px 1px #fdfdfd;
+}
+.language{
+    display: flex;
+    align-items: center;
+}
+.language_btn{
+    width: 70px;
+    height: 30px;
+    border: 1px solid rgba(195, 195, 195, 0.85);
+    border-right: none;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    /*cursor: pointer;*/
+}
+.language_btn :hover{
+    background: #1cacff;
+    color: #fff;
+}
+.language_btn a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #f0f0f0;
+}
+.language_btn_right{
+    border-right: 1px solid rgba(195, 195, 195, 0.85);
+}
+/*弹出登录框*/
+body .layui-layer-my{border-radius: 8px;}
+body .layui-layer-my .layui-layer-title{background:#1cacff; color:#fff; border: none;}
+body .layui-layer-my .layui-layer-btn{border-top:0px solid #E9E7E7}
+body .layui-layer-my .layui-layer-btn a{
+    background: linear-gradient(rgba(28, 172, 255, 0.49), #1cacff);
+    width: 80%;
+    border-radius: 14px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+body .layui-layer-my .login_input{
+    width: 92%;
+    height: 26px;
+    margin: 8px auto 14px;
+    border: 1px solid #9f9f9f;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+}
+body .layui-layer-my .login_input label{
+    padding: 0 0 0 8px;
+}
+body .layui-layer-my .login_input input{
+    padding: 0 0 0 4px;
+    border: none;
+}
+.shadow{
+    position: relative;
+    border-radius: 5px;
+    background-color: #fff;
+    -moz-box-shadow: 0px 1px 1px #bdbdbd;
+    -webkit-box-shadow: 0px 1px 1px #bdbdbd;
+    box-shadow: 0px 1px 1px #bdbdbd;
+}

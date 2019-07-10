@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <title>缅甸佛塔监测系统</title>
+    <style>
+        body {
+            background: #f6f6f6;
+            min-width: 1000px;
+        }
+        .content{
+            width: 1000px;
+            margin: 70px auto;
+            background: #fff;
+        }
+        .date_form ul{
+            padding: 20px;
+        }
+        .date_form ul li{
+            margin: 10px 0;
+        }
+        .date_form input{
+            background: transparent url("./img/ico/date.png") no-repeat 144px center;
+            border: 1px solid #c8c8c8;
+            height: 20px;
+            cursor: pointer;
+            padding: 0 0 0 8px;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header_content">
+        <div class="header_left">
+            <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt="">缅甸佛塔监测系统</a></div>
+            <ul class="layui-nav layui-bg-blue" >
+                <li class="layui-nav-item"><a href="./monitor.html">监测数据</a></li>
+                <li class="layui-nav-item layui-this"><a href="./report_form.html">统计报表</a></li>
+                <li class="layui-nav-item"><a href="./alarm.html">监测报警</a></li>
+            </ul>
+        </div>
+        <div class="header_right">
+            <div style="display: none" class="user">用户名：<span></span></div>
+            <div class="logout"></div>
+            <ul class="language">
+                <li class="language_btn"><a href="#">中文</a></li>
+                <li class="language_btn"><a href="#" style="font-family: '微软雅黑 Light'">ENGLISH</a></li>
+                <li class="language_btn language_btn_right"><a href="#">မြန်မာ</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="content shadow">
+        <br/><hr/>
+        <div class="date_form">
+            <ul>
+                <li>起始时间 <input type="text" id="start"></li>
+                <li>结束时间 <input type="text" id="end">
+                    <div class="layui-btn layui-btn-normal layui-btn-sm">生成报表</div>
+                    <div class="layui-btn layui-btn-normal layui-btn-sm">下载报表</div>
+                </li>
+            </ul>
+        </div>
+        <div style="height: 300px"></div>
+    </div>
+
+</body>
+<script src="./js/jquery-1.11.3.min.js"></script>
+<script src="./js/jquery.cookie.js"></script>
+<script src="./layui/layui.js"></script>
+<script src="./js/header.js"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+</script>
+</html>

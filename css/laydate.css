@@ -1,0 +1,46 @@
+.layui-laydate-main {
+    width: 200px;
+}
+.layui-laydate-content {
+    padding: 5px;
+}
+.layui-laydate, .layui-laydate-hint {
+    border: none;
+    border-radius: 5px 5px 0 0;
+}
+.layui-table td, .layui-table th{
+    font-size: 12px;
+}
+.layui-table, .layui-table-view {
+    margin: 0;
+}
+.layui-table-cell{
+    padding: 0 10px;
+}
+.layui-table td, .layui-table th, .layui-table-fixed-r, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row]{
+    border-color: #f1f1f1;
+}
+.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table[lay-even] tr:nth-child(even){
+    background-color: #f8f8f8;
+}
+.layui-table-header table tr{
+    background-color: #f1f1f1;
+}
+.layui-laydate-header {
+    padding: 10px 54px 5px;
+}
+.layui-laydate-header i.laydate-prev-y {
+    left: 6px;
+}
+.layui-laydate-header i.laydate-prev-m {
+    left: 28px;
+}
+.layui-laydate-header i.laydate-next-y {
+    right: 6px;
+}
+.layui-laydate-header i.laydate-next-m {
+    right: 28px;
+}
+#datetab .layui-laydate-footer{
+    display: none;
+}

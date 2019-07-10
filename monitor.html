@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <title>缅甸佛塔监测系统</title>
+    <style>
+        body{
+            background: #f6f6f6;
+            min-width: 1000px;
+        }
+        .content{
+            /*border: 1px solid;*/
+            width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+        }
+        .left{
+            width: 196px;
+            background: #706b69;
+            position: fixed;
+            top: 60px;
+            height: 100%;
+        }
+        .layui-collapse{
+            border: none;
+        }
+        .layui-colla-title{
+            background: #4b4644;
+            color: white;
+        }
+        .layui-collapse li{
+            color: white;
+        }
+        .layui-colla-item{
+            border-color: #7f7a78;
+        }
+        .layui-colla-content{
+            border-color: transparent;
+        }
+        .right{
+            width: 804px;
+            padding: 0 0 20px 16px;
+            box-sizing: border-box;
+            position: absolute;
+            left: 196px;
+            top: 70px;
+        }
+        .legend{
+            line-height: 16px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 15px 0;
+        }
+        .legend span{
+            margin-left: 15px;
+            padding-left: 15px;
+        }
+        .icon_j{
+            background: url("./img/ico/1.png") no-repeat left center;
+        }
+        .icon_l{
+            background: url("./img/ico/2.png") no-repeat left center;
+        }
+        .icon_y{
+            background: url("./img/ico/3.png") no-repeat left center;
+        }
+        .icon_q{
+            background: url("./img/ico/4.png") no-repeat left center;
+        }
+        .ta_img{
+            display: flex;
+            justify-content: space-between;
+        }
+        .ta_img>:nth-child(1){
+            width: 403px;
+            height: 344px;
+            background: url("./img/dataImg/t2_l.png") no-repeat center;
+        }
+        .ta_img>:nth-child(2){
+            width: 368px;
+            height: 344px;
+            background: url("./img/dataImg/t2_r.png") no-repeat center;
+        }
+        .title_dev{
+            padding: 25px 0 10px;
+        }
+        .data_dev{
+            height: 300px;
+        }
+        .data_dev>div{
+            height: 300px;
+        }
+        .btn_yue{
+            position: absolute;
+            top:6px;
+            right: 46px;
+            z-index: 10;
+        }
+        .layui-btn{
+            display: inline-block;
+            width: 34px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+        }
+        .layui-btn-primary:hover {
+            border-color: #1E9FFF;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header_content">
+            <div class="header_left">
+                <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt="">缅甸佛塔监测系统</a></div>
+                <ul class="layui-nav layui-bg-blue" >
+                    <li class="layui-nav-item layui-this"><a href="./monitor.html">监测数据</a></li>
+                    <li class="layui-nav-item"><a href="./report_form.html">统计报表</a></li>
+                    <li class="layui-nav-item"><a href="./alarm.html">监测报警</a></li>
+                </ul>
+            </div>
+            <div class="header_right">
+                <div style="display: none" class="user">用户名：<span></span></div>
+                <div class="logout"></div>
+                <ul class="language">
+                    <li class="language_btn"><a href="#">中文</a></li>
+                    <li class="language_btn"><a href="#" style="font-family: '微软雅黑 Light'">ENGLISH</a></li>
+                    <li class="language_btn language_btn_right"><a href="#">မြန်မာ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">1号塔</h2>
+                    <div class="layui-colla-content layui-show">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">2号塔</h2>
+                    <div class="layui-colla-content layui-show">
+                        <ul>
+                            <li>a</li>
+                            <li>b</li>
+                            <li>c</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="right">
+            <div class="legend">
+                <p>1#塔</p>
+                <p>
+                    <span class="icon_j">J(静力水准仪)</span>
+                    <span class="icon_l">L(裂缝计)</span>
+                    <span class="icon_y">Y(应力应变计)</span>
+                    <span class="icon_q">Q(倾角计)</span>
+                </p>
+            </div>
+            <div class="ta_img">
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+            </div>
+
+            <p class="title_dev">静力水准仪</p>
+            <div class="data_dev shadow">
+                <p class="btn_yue">
+                    <span class="layui-btn layui-btn-primary layui-btn-sm">月</span>
+                    <span class="layui-btn layui-btn-primary layui-btn-sm">日</span>
+                </p>
+                <div id="jingli"></div>
+            </div>
+            <p class="title_dev">倾角计</p>
+            <div class="data_dev shadow">
+                <div id="qingjiao"></div>
+            </div>
+            <p class="title_dev">裂缝计</p>
+            <div class="data_dev shadow"></div>
+
+        </div>
+    </div>
+</body>
+<script src="./js/jquery-1.11.3.min.js"></script>
+<script src="./js/jquery.cookie.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script src="./layui/layui.js"></script>
+<script src="./js/header.js"></script>
+<script src="./js/monitor.js"></script>
+</html>
