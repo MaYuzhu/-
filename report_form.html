@@ -26,7 +26,6 @@
             background: transparent url("./img/ico/date.png") no-repeat 144px center;
             border: 1px solid #c8c8c8;
             height: 20px;
-            cursor: pointer;
             padding: 0 0 0 8px;
             margin-right: 50px;
         }
@@ -61,11 +60,35 @@
                 <li>起始时间 <input type="text" id="start"></li>
                 <li>结束时间 <input type="text" id="end">
                     <div class="layui-btn layui-btn-normal layui-btn-sm">生成报表</div>
-                    <div class="layui-btn layui-btn-normal layui-btn-sm">下载报表</div>
+                    <div class="layui-btn layui-btn-normal layui-btn-sm">
+                        <a style="display: block;color: white" class="word_export" href="javascript:void(0)">下载报表</a>
+                    </div>
                 </li>
             </ul>
         </div>
-        <div style="height: 300px"></div>
+        <div style="height: 300px">
+            <div id="page_content">
+
+                <p>这是一段文字</p>
+                <img src="./img/dataImg/t2_l.png" alt="" style="height: 200px">
+                <table border="1">
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>a</td>
+                        <td>b</td>
+                        <td>c</td>
+                        <td>d</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
     </div>
 
 </body>
@@ -73,6 +96,18 @@
 <script src="./js/jquery.cookie.js"></script>
 <script src="./layui/layui.js"></script>
 <script src="./js/header.js"></script>
+
+<!--下载word-->
+<script src="./js/FileSaver.js"></script>
+<script src="./js/jquery.wordexport.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $("a.word_export").click(function(event) {
+            $("#page_content").wordExport("报表");
+        });
+    });
+</script>
+
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;
