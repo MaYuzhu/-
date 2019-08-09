@@ -26,9 +26,15 @@
             <div class="header_left">
                 <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt="">缅甸佛塔监测系统</a></div>
                 <ul class="layui-nav layui-bg-blue" >
-                    <li class="layui-nav-item"><a href="./monitor.html">监测数据</a></li>
-                    <li class="layui-nav-item"><a href="./report_form.html">统计报表</a></li>
-                    <li class="layui-nav-item"><a href="./alarm.html">监测报警</a></li>
+                    <li class="layui-nav-item">
+                        <a href="./monitor.html" onclick="return isLogin()">监测数据</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="./report_form.html" onclick="return isLogin()">统计报表</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="./alarm.html" onclick="return isLogin()">监测报警</a>
+                    </li>
                 </ul>
             </div>
             <div class="header_right">
@@ -54,3 +60,20 @@
 <script src="./js/header.js"></script>
 
 </html>
+<script type="text/javascript">
+    var type = navigator.appName;
+    if (type == "Netscape"){
+        var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
+    }else{
+        var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
+    };
+    var lang = lang.substr(0, 2);//获取浏览器配置语言前两位
+    if (lang == "zh"){
+        //console.log(lang);
+        //window.location.replace('url');//中文编码时打开链接
+    }else if (lang == "en"){
+        console.log(lang);
+    }else{//其他语言编码时打开以下链接
+        console.log(lang);
+    };
+</script>

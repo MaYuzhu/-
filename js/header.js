@@ -1,5 +1,6 @@
 
-var url = 'http://36.110.66.217:9090'
+//var url = 'http://36.110.66.217:9090'
+var url = 'http://192.168.20.15:8280'
 
 //$.cookie('username');
 $('.logout').text($.cookie('username')?'退出':'登录')
@@ -9,6 +10,35 @@ if($.cookie('username')){
 }else{
     $('.user').hide()
 }
+//获取浏览器语言
+var type = navigator.appName;
+var langAjax
+if (type == "Netscape"){
+    var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
+}else{
+    var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
+}
+var lang = lang.substr(0, 2);//获取浏览器配置语言前两位
+if (lang == "zh"){
+    //console.log(lang);
+    langAjax = 'en_US'
+    //window.location.replace('url');//中文编码时打开链接
+}else if (lang == "en"){
+    //console.log(lang);
+    langAjax = 'zh_CN'
+}else{//其他语言编码时打开以下链接
+    console.log(lang);
+}
+
+//跳转前判断是否登录
+function isLogin(){
+    if(!$.cookie('username')) {
+        layer.msg("没有登录或超时,请登录")
+        return false;
+    }
+    return true;
+}
+
 
 layui.use(['layer', 'form'], function(){
     var layer = layui.layer
@@ -38,7 +68,6 @@ layui.use(['layer', 'form'], function(){
                     var username = $('.username').val()
                     var pwd = $('.pwd').val()
                     if(!username){
-                        //$('.tips').text("请输入用户名")
                         $('.tips').text("请输入用户名")
                         return
                     }
@@ -52,12 +81,13 @@ layui.use(['layer', 'form'], function(){
                         async:false,
                         cache:false,
                         dataType:'jsonp',
-                        data:{username:username,password:pwd},
+                        data:{username:username,password:pwd,language:langAjax},
                         success:function (res) {
                             console.log(res)
                             if(res.status===1){
                                 layer.msg("登录成功",{time: 2000})
-                                $.cookie('username',res.username,{ path: '/'})
+                                $.cookie('username',res.username,{ path: '/'}) //language:'en_US'
+                                $.cookie('language',langAjax,{ path: '/'})
                                 setTimeout(function () {
                                     location.reload()
                                 },2000)
@@ -78,7 +108,8 @@ layui.use(['layer', 'form'], function(){
             $.removeCookie('username',{ path: '/'})
             layer.msg("退出成功",{time: 2000})
             setTimeout(function () {
-                location.reload()
+                location.href = './index.html'
+                //location.reload()
             },2000)
         }
     })
