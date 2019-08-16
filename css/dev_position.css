@@ -1,0 +1,11 @@
+/*设备位置定位*/
+.ta_img1>.shadow{
+    position: relative;
+}
+.ta_img1>.shadow>div{
+    position: absolute;
+}
+.ta_img1>:nth-child(1)>.icon_00{
+    top: 212px;
+    left: 150px;
+}

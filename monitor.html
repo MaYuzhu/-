@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./layui/css/layui.css">
     <link rel="stylesheet" href="./css/header.css">
-
+    <link rel="stylesheet" href="./css/dev_position.css">
     <title>缅甸佛塔监测系统</title>
     <style>
         body{
@@ -47,43 +47,73 @@
             left: 196px;
             top: 70px;
         }
-        .legend{
+        .one .legend{
             line-height: 16px;
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
             padding: 15px 0;
         }
-        .legend span{
+        .one .legend span{
             margin-left: 15px;
             padding-left: 15px;
         }
-        .icon_j{
-            background: url("./img/ico/1.png") no-repeat left center;
-        }
-        .icon_l{
+        .one .icon_2{
             background: url("./img/ico/2.png") no-repeat left center;
         }
-        .icon_y{
+        .one .icon_1{
             background: url("./img/ico/3.png") no-repeat left center;
         }
-        .icon_q{
-            background: url("./img/ico/4.png") no-repeat left center;
+        .one .icon_0{
+            background: url("./img/ico/1.png") no-repeat left center;
         }
-        .ta_img{
+        .one .ta_img1{
             display: flex;
             justify-content: space-between;
         }
-        .ta_img>:nth-child(1){
+        .one .ta_img1>:nth-child(1){
             width: 403px;
             height: 344px;
-            background: url("./img/dataImg/t2_l.png") no-repeat center;
+            background: url("./img/dataImg/ta1_1.jpg") no-repeat center;
         }
-        .ta_img>:nth-child(2){
+        .one .ta_img1>:nth-child(2){
             width: 368px;
             height: 344px;
-            background: url("./img/dataImg/t2_r.png") no-repeat center;
+            background: url("./img/dataImg/ta1_2.jpg") no-repeat center;
         }
+
+        .two .legend{
+            line-height: 16px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 15px 0;
+        }
+        .two .legend span{
+            margin-left: 15px;
+            padding-left: 15px;
+        }
+        .two .icon_1{
+            background: url("./img/ico/3.png") no-repeat left center;
+        }
+        .two .icon_0{
+            background: url("./img/ico/1.png") no-repeat left center;
+        }
+        .two .ta_img2{
+            display: flex;
+            justify-content: space-between;
+        }
+        .two .ta_img2>:nth-child(1){
+            width: 403px;
+            height: 344px;
+            background: url("./img/dataImg/ta2_1.png") no-repeat center;
+        }
+        .two .ta_img2>:nth-child(2){
+            width: 368px;
+            height: 344px;
+            background: url("./img/dataImg/ta2_2.jpg") no-repeat center;
+        }
+        /*图表*/
         .title_dev{
             padding: 25px 0 10px;
         }
@@ -101,10 +131,17 @@
         }
         .layui-btn{
             display: inline-block;
-            width: 34px;
+            width: 56px;
             height: 24px;
             line-height: 24px;
             text-align: center;
+            position: absolute;
+            left: -120px;
+        }
+        .layui-btn+.layui-btn{
+            margin-left: -4px;
+            position: absolute;
+            left: -54px;
         }
         .layui-btn-primary:hover {
             border-color: #1E9FFF;
@@ -144,30 +181,40 @@
             background: #01AAED;
             border: 1px solid #01AAED;
         }
+        .show_no{
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="header_content">
-            <div class="header_left">
-                <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt="">缅甸佛塔监测系统</a></div>
-                <ul class="layui-nav layui-bg-blue">
-                    <li class="layui-nav-item layui-this"><a href="./monitor.html">监测数据</a></li>
-                    <li class="layui-nav-item"><a href="./report_form.html">统计报表</a></li>
-                    <li class="layui-nav-item"><a href="./alarm.html">监测报警</a></li>
-                </ul>
-            </div>
-            <div class="header_right">
-                <div style="display: none" class="user">用户名：<span></span></div>
-                <div class="logout"></div>
-                <ul class="language">
-                    <li class="language_btn"><a href="#">中文</a></li>
-                    <li class="language_btn"><a href="#" style="font-family: '微软雅黑 Light'">ENGLISH</a></li>
-                    <li class="language_btn language_btn_right"><a href="#">မြန်မာ</a></li>
-                </ul>
-            </div>
+    <div class="header_content">
+        <div class="header_left">
+            <div class="logo"><a href="./index.html"><img src="./img/logo.png" alt=""><i>--</i></a></div>
+            <ul class="layui-nav layui-bg-blue" >
+                <li class="layui-nav-item layui-this">
+                    <a href="./monitor.html" onclick="return isLogin()"><i>--</i></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="./report_form.html" onclick="return isLogin()"><i>--</i></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="./alarm.html" onclick="return isLogin()"><i>--</i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="header_right">
+            <div style="display: none" class="user"><i>用户名</i>：<span></span></div>
+            <div class="logout"></div>
+            <ul class="language">
+                <li class="language_btn"><a onclick="changeLang('zh')" href="javascript:;">中文</a></li>
+                <li class="language_btn"><a onclick="changeLang('en')" href="javascript:;" style="font-family: '微软雅黑 Light'">ENGLISH</a></li>
+                <li class="language_btn language_btn_right"><a onclick="changeLang('my')" href="javascript:;">မြန်မာ</a></li>
+            </ul>
         </div>
     </div>
+
+</div>
     <div class="content">
         <div class="left">
             <div class="layui-collapse" lay-accordion="">
@@ -210,19 +257,34 @@
             </div>
         </div>
         <div class="right">
-            <div class="legend">
-                <p>1#塔</p>
-                <p>
-                    <span class="icon_j">J(静力水准仪)</span>
-                    <span class="icon_l">L(裂缝计)</span>
-                    <span class="icon_y">Y(应力应变计)</span>
-                    <span class="icon_q">Q(倾角计)</span>
-                </p>
+            <div class="one ">
+                <div class="legend">
+                    <p>1#塔</p>
+                    <p>
+                        <span class="icon_0">Q(倾角计)</span>
+                        <span class="icon_1">L(裂缝计)</span>
+                        <span class="icon_2">J(静力水准仪)</span>
+                    </p>
+                </div>
+                <div class="ta_img1">
+                    <div class="shadow"></div>
+                    <div class="shadow"></div>
+                </div>
             </div>
-            <div class="ta_img">
-                <div class="shadow"></div>
-                <div class="shadow"></div>
+            <div class="two show_no">
+                <div class="legend">
+                    <p>2#塔</p>
+                    <p>
+                        <span class="icon_0">Q(倾角计)</span>
+                        <span class="icon_1">L(裂缝计)</span>
+                    </p>
+                </div>
+                <div class="ta_img2">
+                    <div class="shadow"></div>
+                    <div class="shadow"></div>
+                </div>
             </div>
+
 
             <div class="right_content">
                 <!--<p class="title_dev">倾角计</p>
@@ -259,6 +321,7 @@
 <script src="./js/jquery.cookie.js"></script>
 <script src="./js/echarts.js"></script>
 <!--<script src="./js/echarts.min.js"></script> 不能显示所有点-->
+<script src="./js/config_lang.js"></script>
 <script src="./layui/layui.js"></script>
 <script src="./js/function.js"></script>
 <script src="./js/header.js"></script>

@@ -1,9 +1,10 @@
 
 (function (w) {
+    var language = $.cookie('language')
     var unitName = {
-        D: { name: "静力水准仪", unit: "mm", print: ['a', 'b'] ,id:"jingli"},//静力水准仪
-        C: { name: "裂缝计", unit: "mm", print: ['val_x'] ,id:"liefeng"},//裂缝计
-        A: { name: "倾角计", unit: "rad", print: ['x','y'] ,id:"qingjiao"},//倾角计
+        D: { name: lang_data[language].D, unit: "mm", print: ['a', 'b'] ,id:"jingli"},//静力水准仪
+        C: { name: lang_data[language].C, unit: "mm", print: ['val_x'] ,id:"liefeng"},//裂缝计
+        A: { name: lang_data[language].A, unit: "rad", print: ['x','y'] ,id:"qingjiao"},//倾角计
     }
 
     var ajaxData = {
@@ -12,23 +13,26 @@
             starttime : sys.dateFormat(sys.dateAdd(new Date(), -3600 * 24)),
             endtime : sys.dateFormat(sys.dateAdd(new Date(), 0)),
             timetype : "hour",
+            language:$.cookie('language')
         },
         devs:{
             buildcode : '1040B0001',
             starttime : sys.dateFormat(sys.dateAdd(new Date(), -3600 * 24)),
             endtime : sys.dateFormat(sys.dateAdd(new Date(), 0)),
             timetype : "hour",
-            devicetype : 'A'
+            devicetype : 'A',
+            language:$.cookie('language'),
         },
         dev:{
             starttime : sys.dateFormat(sys.dateAdd(new Date(), -3600 * 24)),
             endtime : sys.dateFormat(sys.dateAdd(new Date(), 0)),
             timetype : "hour",
-            devcode : " "
+            devcode : " ",
+            language:$.cookie('language')
         }
 
     }
-
+    //console.log($.cookie('language'))
 
     //获取塔名与设备  http://192.168.20.15:8280/zzcismp/base/getProBuildsDevs.shtml?projcode=10400010&language=zh_CN
     $.ajax({
@@ -58,9 +62,14 @@
                             <p value=${newArrA[j][0].type} class="title_dev_name active">${unitName[newArrA[j][0].type].name}</p>
                             <ul></ul>
                         </div>`)
+
                         for(let k=0;k<newArrA[j].length;k++){
                             $(`.left .layui-colla-content:eq(${i}) ul:eq(${j})`).append(`
                                 <li value=${newArrA[j][k].devcode}>${newArrA[j][k].devname}</li>
+                            `)
+                            //塔加标记
+                            $(`.ta_img${i+1}>:nth-child(1),.ta_img${i+1}>:nth-child(2)`).append(`
+                                <div style="width: 12px;height: 12px" class='icon_${j} icon_${j}${k}'></div>
                             `)
                         }
                     }
@@ -96,11 +105,13 @@
                 })
 
             }else if(json.status == 5){
-                layer.msg("没有登录或登录超时,请重新登录")
+                //layer.msg("没有登录或登录超时,请重新登录")
+                layer.msg(lang_data[language].msg_no_login)
+                location.href = './index.html'
             }
         },
         error:function () {
-            layer.msg("请检查您的网络")
+            layer.msg(lang_data[language].network_wrong)
         }
     })
 
@@ -132,8 +143,12 @@
                 <p class="title_dev">${unitName[newArrA[i][0].type].name}</p>
                 <div class="data_dev shadow">
                     <p class="btn_yue" value=${newArrA[i][0].type}>
-                        <span value="day" class="layui-btn layui-btn-primary layui-btn-sm">月</span>
-                        <span value="hour" class="layui-btn layui-btn-primary layui-btn-sm bg_blue">日</span>
+                        <span value="day" class="layui-btn layui-btn-primary layui-btn-sm">
+                        ${lang_data[language].month}
+                        </span>
+                        <span value="hour" class="layui-btn layui-btn-primary layui-btn-sm bg_blue">
+                        ${lang_data[language].day}
+                        </span>
                     </p>
                     <div id=${unitName[newArrA[i][0].type].id}></div>
                 </div>`)
@@ -296,7 +311,7 @@
                 })
             },
             error:function () {
-                alert("请检查您的网络")
+                layer.msg(lang_data[language].network_wrong)
             }
         })
     }
@@ -344,7 +359,7 @@
 
             },
             error:function () {
-                layer.msg("请检查您的网络")
+                layer.msg(lang_data[language].network_wrong)
             }
         })
     }
@@ -381,12 +396,12 @@
                     createEchart({legendArr:devName,xAxisArr:xData,seriesArr:cDev,
                         id:unitName[id].id,unit:unitName[json.type].unit})
                 }else {
-                    layer.msg("暂无数据")
+                    layer.msg(lang_data[language].no_data)
                 }
 
             },
             error:function () {
-                layer.msg("请检查您的网络")
+                layer.msg(lang_data[language].network_wrong)
             }
         })
     }
@@ -400,12 +415,16 @@
             //layer.msg('展开状态：' + data.show);
             if(data.title.context.id=='ta1' && data.show){
                 //layer.msg('1打开')
+                $('.one').removeClass('show_no')
+                $('.two').addClass('show_no')
                 ajaxData.allDevs.buildcode = '1040B0001'
                 $('.ta1040B0001 .title_dev_name').addClass('active')
                 $('.ta1040B0001 li').removeClass('active')
                 allData()
             }else if(data.title.context.id=='ta2' && data.show){
                 //layer.msg('2打开')
+                $('.two').removeClass('show_no')
+                $('.one').addClass('show_no')
                 ajaxData.allDevs.buildcode = '1040B0002'
                 $('.ta1040B0002 .title_dev_name').addClass('active')
                 $('.ta1040B0002 li').removeClass('active')
@@ -420,6 +439,12 @@
     function createEchart({legendArr,xAxisArr,seriesArr,id,unit}) {
         var lineDom = document.getElementById(id)
         var myChart = echarts.init(lineDom)
+        myChart.showLoading({
+            text: lang_data[language].loading,
+            textStyle: { fontSize : 30 , color: '#444' },
+            effectOption: {backgroundColor: 'rgba(0, 0, 0, 0)'}
+        })
+
         options = null;
         options = {
             tooltip:{
@@ -430,13 +455,13 @@
             },
             toolbox: {
                 orient: 'horizontal',//方向
-                right: '10',//距左
+                right: '16',
                 top: '2',//距上
                 feature: {
                     saveAsImage: {
                         type: "png",
                         name: "",
-                        title: "下载",
+                        title: lang_data[language].download,
                     }
                 }
             },
@@ -464,7 +489,7 @@
             },
             yAxis: [{
                 dataType: '',
-                name: '单位:' + unit,
+                name: lang_data[language].unit +'：' + unit,
                 type: 'value',
                 min: function (value) {
                     return (value.min - (((value.max - value.min) ? (value.max - value.min) : value.min) * 0.1)).toFixed(3);
@@ -478,7 +503,10 @@
         }
 
         if (options && typeof options === "object") {
-            myChart.setOption(options, true);
+            setTimeout(()=>{
+                myChart.setOption(options, true)
+                myChart.hideLoading()
+            },0)
         }
 
     }
@@ -489,7 +517,7 @@
     }
 
     //按条件拆分数组
-    let formateArrData = (initialArr, name, newArr) => {
+    function formateArrData (initialArr, name, newArr) {
         // 判定传参是否符合规则
         if (!(initialArr instanceof Array) || !(newArr instanceof Array)) {
             return '请传入正确格式的数组'

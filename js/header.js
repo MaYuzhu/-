@@ -2,18 +2,23 @@
 //var url = 'http://36.110.66.217:9090'
 var url = 'http://192.168.20.15:8280'
 
-//$.cookie('username');
-$('.logout').text($.cookie('username')?'退出':'登录')
+//获取浏览器语言
+var type = navigator.appName;
+
+var langAjax = $.cookie('language')?$.cookie('language'):'zh_CN'
+
+$.cookie('language',langAjax,{ path: '/'})
+    //$.cookie('username');
+    //$('.logout').text($.cookie('username')?'退出':'登录')
+
 if($.cookie('username')){
     $('.user').show()
     $('.user span').text($.cookie('username'))
 }else{
     $('.user').hide()
 }
-//获取浏览器语言
-var type = navigator.appName;
-var langAjax
-if (type == "Netscape"){
+
+/*if (type == "Netscape"){
     var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
 }else{
     var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
@@ -21,31 +26,45 @@ if (type == "Netscape"){
 var lang = lang.substr(0, 2);//获取浏览器配置语言前两位
 if (lang == "zh"){
     //console.log(lang);
-    langAjax = 'en_US'
+    langAjax = 'zh_CN'
     //window.location.replace('url');//中文编码时打开链接
 }else if (lang == "en"){
     //console.log(lang);
-    langAjax = 'zh_CN'
+    langAjax = 'en_US'
 }else{//其他语言编码时打开以下链接
     console.log(lang);
+}*/
+initHtml()
+function initHtml() {
+    $.cookie('language',langAjax,{ path: '/'})
+    var language = $.cookie('language')
+    document.title = lang_data[language].title    //# 设置title的值。
+    //设置导航栏
+    for(let i=0;i<lang_data[language].menu.length;i++){
+        $('.header_left').find(`i:eq(${i})`).text(lang_data[language].menu[i])
+    }
+    $('.header_right .user i').text(lang_data[language].user)
+    $('.logout').text($.cookie('username')?lang_data[language].logout:lang_data[language].login)
+    $('.logout').attr('value',$.cookie('username')?'false':'true')
 }
+
 
 //跳转前判断是否登录
 function isLogin(){
+    var language = $.cookie('language')
     if(!$.cookie('username')) {
-        layer.msg("没有登录或超时,请登录")
+        layer.msg(lang_data[language].msg_no_login)
         return false;
     }
     return true;
 }
 
-
 layui.use(['layer', 'form'], function(){
     var layer = layui.layer
         ,form = layui.form;
-
+    var language = $.cookie('language')
     $('.logout').on('click',function () {
-        if($('.logout').text()=='登录'){
+        if($('.logout').attr('value')=='true'){
             $(document).keyup(function(event){
                 if(event.keyCode ==13){
                     $('.layui-layer-btn0').click()
@@ -55,11 +74,11 @@ layui.use(['layer', 'form'], function(){
                 skin: 'layui-layer-my',
                 type:0,
                 //title:false,
-                title: ['登录','font-size:16px;border-radius: 8px 8px 0 0;'],
-                content: '<div class="login_input"><label>用户<input type="text" class="username"></label></div>' +
-                '<div class="login_input"><label>密码<input type="password" class="pwd"></label>' +
+                title: [lang_data[language].login,'font-size:16px;border-radius: 8px 8px 0 0;'],
+                content: '<div class="login_input"><label>'+lang_data[language].username+'<input type="text" class="username"></label></div>' +
+                '<div class="login_input"><label>'+lang_data[language].password+'<input type="password" class="pwd"></label>' +
                 '</div><p class="tips" style="color:#bb0000;margin-left:8px;"></p>',
-                //btn: '确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;认',
+                btn: lang_data[language].confirm,
                 closeBtn: 2,
                 shadeClose:true,
                 resize:false,
@@ -68,11 +87,11 @@ layui.use(['layer', 'form'], function(){
                     var username = $('.username').val()
                     var pwd = $('.pwd').val()
                     if(!username){
-                        $('.tips').text("请输入用户名")
+                        $('.tips').text(lang_data[language].input_user)
                         return
                     }
                     if(!pwd){
-                        $('.tips').text("请输入密码")
+                        $('.tips').text(lang_data[language].input_pwd)
                         return
                     }
                     //layer.close(index);
@@ -83,30 +102,29 @@ layui.use(['layer', 'form'], function(){
                         dataType:'jsonp',
                         data:{username:username,password:pwd,language:langAjax},
                         success:function (res) {
-                            console.log(res)
+                            //console.log(res)
                             if(res.status===1){
-                                layer.msg("登录成功",{time: 2000})
+                                layer.msg(lang_data[language].login_right,{time: 2000})
                                 $.cookie('username',res.username,{ path: '/'}) //language:'en_US'
-                                $.cookie('language',langAjax,{ path: '/'})
                                 setTimeout(function () {
                                     location.reload()
                                 },2000)
                             }else{
-                                $('.tips').text("用户名或密码错误")
+                                $('.tips').text(lang_data[language].login_wrong)
                                 return
                             }
 
                         },
                         error:function () {
-                            layer.msg("请检查您的网络")
+                            layer.msg(lang_data[language].network_wrong)
                         }
 
                     })
                 }
-            });
-        }else if($('.logout').text()=='退出'){
+            })
+        }else if($('.logout').attr('value')=='false'){
             $.removeCookie('username',{ path: '/'})
-            layer.msg("退出成功",{time: 2000})
+            layer.msg(lang_data[language].exit_s,{time: 2000})
             setTimeout(function () {
                 location.href = './index.html'
                 //location.reload()
@@ -120,5 +138,22 @@ layui.use(['layer', 'form'], function(){
 layui.use('element', function(){
     var element = layui.element;
 });
+//语言切换
+function changeLang(lang){
+    //console.log(lang)
+    if(lang == 'zh'){
+        langAjax = 'zh_CN'
+        initHtml()
+        location.reload()
+    }else if(lang == 'en'){
+        langAjax = 'en_US'
+        initHtml()
+        location.reload()
+    }else if(lang == 'my'){
+        langAjax = 'my_BU'
+        initHtml()
+        location.reload()
+    }
+}
 
 

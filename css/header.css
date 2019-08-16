@@ -20,6 +20,9 @@
 .header_right{
     align-items: center;
 }
+.logo{
+    width: 196px;
+}
 .logo a{
     display: flex;
     height: 100%;
@@ -33,10 +36,12 @@
     height: 46px;
 }
 .user{
+    width: 82px;
     color: #f0f0f0;
     margin-right: 10px;
 }
 .logout{
+    width: 62px;
     height: 20px;
     line-height: 20px;
     border: 1px solid rgba(195, 195, 195, 0.85);
@@ -45,6 +50,7 @@
     margin-right: 20px;
     color: #eee;
     cursor: pointer;
+    text-align: center;
 }
 .logout:hover{
     color: #fff;
@@ -115,4 +121,7 @@ body .layui-layer-my .login_input input{
     -moz-box-shadow: 0px 1px 1px #bdbdbd;
     -webkit-box-shadow: 0px 1px 1px #bdbdbd;
     box-shadow: 0px 1px 1px #bdbdbd;
+}
+.layui-layer-dialog {
+    width: 300px;
 }
