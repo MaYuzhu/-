@@ -75,11 +75,13 @@
             width: 403px;
             height: 344px;
             background: url("./img/dataImg/ta1_1.jpg") no-repeat center;
+            background-size: 100% 100%;
         }
         .one .ta_img1>:nth-child(2){
             width: 368px;
             height: 344px;
             background: url("./img/dataImg/ta1_2.jpg") no-repeat center;
+            background-size: 100% 100%;
         }
 
         .two .legend{
@@ -106,12 +108,14 @@
         .two .ta_img2>:nth-child(1){
             width: 403px;
             height: 344px;
-            background: url("./img/dataImg/ta2_1.png") no-repeat center;
+            background: rgba(210, 210, 210, 0.62) url("./img/dataImg/ta2_1.png") no-repeat;
+            background-size: 100% 100%;
         }
         .two .ta_img2>:nth-child(2){
             width: 368px;
             height: 344px;
-            background: url("./img/dataImg/ta2_2.jpg") no-repeat center;
+            background: url("./img/dataImg/ta2_2.png") no-repeat center;
+            background-size: 100% 100%;
         }
         /*图表*/
         .title_dev{
@@ -184,6 +188,7 @@
         .show_no{
             display: none;
         }
+
     </style>
 </head>
 <body>
@@ -261,9 +266,9 @@
                 <div class="legend">
                     <p>1#塔</p>
                     <p>
-                        <span class="icon_0">Q(倾角计)</span>
-                        <span class="icon_1">L(裂缝计)</span>
-                        <span class="icon_2">J(静力水准仪)</span>
+                        <span class="icon_0">Q(<i></i>)</span>
+                        <span class="icon_1">L(<i></i>)</span>
+                        <span class="icon_2">J(<i></i>)</span>
                     </p>
                 </div>
                 <div class="ta_img1">
@@ -275,8 +280,8 @@
                 <div class="legend">
                     <p>2#塔</p>
                     <p>
-                        <span class="icon_0">Q(倾角计)</span>
-                        <span class="icon_1">L(裂缝计)</span>
+                        <span class="icon_0">Q(<i></i>)</span>
+                        <span class="icon_1">L(<i></i>)</span>
                     </p>
                 </div>
                 <div class="ta_img2">
@@ -325,5 +330,6 @@
 <script src="./layui/layui.js"></script>
 <script src="./js/function.js"></script>
 <script src="./js/header.js"></script>
+<!--<script src="./js/monitor.js"></script>-->
 <script src="./js/monitor.js"></script>
 </html>

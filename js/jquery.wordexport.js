@@ -29,10 +29,12 @@ if (typeof jQuery !== "undefined" && typeof saveAs !== "undefined") {
                 // Calculate dimensions of output image
                 var w = Math.min(img[i].width, options.maxWidth);
                 var h = img[i].height * (w / img[i].width);
+
                 // Create canvas for converting image to data URL
                 var canvas = document.createElement("CANVAS");
                 canvas.width = w;
                 canvas.height = h;
+
                 // Draw image to canvas
                 var context = canvas.getContext('2d');
                 context.drawImage(img[i], 0, 0, w, h);
@@ -63,6 +65,7 @@ if (typeof jQuery !== "undefined" && typeof saveAs !== "undefined") {
 
             //TODO: load css from included stylesheet
             var styles = "";
+
 
             // Aggregate parts of the file together
             var fileContent = static.mhtml.top.replace("_html_", static.mhtml.head.replace("_styles_", styles) + static.mhtml.body.replace("_body_", markup.html())) + mhtmlBottom;

@@ -327,3 +327,196 @@ charts.yAxis_name = function (str) {
     return name + str;
 }
 var echarts_baidu = charts;
+
+
+//缅甸 我的
+//图表展示
+function createEchart({legendArr,xAxisArr,seriesArr,id,unit}) {
+    var lineDom = document.getElementById(id)
+    var myChart = echarts.init(lineDom)
+    myChart.showLoading({
+        text: lang_data[language].loading,
+        textStyle: { fontSize : 30 , color: '#444' },
+        effectOption: {backgroundColor: 'rgba(0, 0, 0, 0)'}
+    })
+    options = null;
+    options = {
+        tooltip:{
+            trigger:'axis',
+            axisPointer: {
+                type: 'line'
+            },
+        },
+        toolbox: {
+            orient: 'horizontal',//方向
+            right: '16',
+            top: '2',//距上
+            feature: {
+                saveAsImage: {
+                    type: "png",
+                    name: "",
+                    title: lang_data[language].download,
+                }
+            }
+        },
+
+        grid: {
+            top: '60px',
+            left: '20px',
+            right: '30px',
+            bottom: '30px',
+            containLabel: true
+        },
+        legend: {
+            data: legendArr, //['123','456'],
+            bottom: '5px',
+            type: 'scroll',
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLabel: {
+                //interval: 0,
+                rotate: 30,
+            },
+            data: xAxisArr ,//[1,2,3,4,5,6]
+        },
+        yAxis: [{
+            dataType: '',
+            name: lang_data[language].unit +'：' + unit,
+            type: 'value',
+            min: function (value) {
+                return (value.min - (((value.max - value.min) ? (value.max - value.min) : value.min) * 0.1)).toFixed(3);
+            },
+            max: function (value) {
+                return (value.max + (((value.max - value.min) ? (value.max - value.min) : value.min) * 0.1)).toFixed(3);
+            }
+        }],
+        series: seriesArr,
+
+    }
+
+    if (options && typeof options === "object") {
+        myChart.setOption(options, true)
+        myChart.hideLoading()
+    }
+
+}
+
+//返回数组中最大值的index
+function indexOfArr(arr){
+    return arr.join(',').substring(0,arr.join(',').indexOf(Math.max.apply(null, arr))).replace(/[^,]/gi, "").length;
+}
+
+//按条件拆分数组
+function formateArrData (initialArr, name, newArr) {
+    // 判定传参是否符合规则
+    if (!(initialArr instanceof Array) || !(newArr instanceof Array)) {
+        return '请传入正确格式的数组'
+    }
+    if (!name) {
+        return '请传入对象属性'
+    }
+    // 每一个类型的单独数组，注意此处不能return出每个alikeArr，
+    // 因为递归的返回值只返回最后一次的值
+    let alikeArr = []
+    let propertyName = ''
+    if (initialArr.length > 0) {
+        propertyName = initialArr[0][`${name}`]
+        let tempArr = []
+        // 将拥有共同propertyName属性的对象放到此次遍历的alikeArr中，
+        // 将其他的对象放入到tempArr中，等待下次遍历
+        initialArr.forEach((val, key) => {
+            if (val[`${name}`] === propertyName) {
+                alikeArr.push(val)
+            } else {
+                tempArr.push(val)
+            }
+        })
+        newArr.push(alikeArr)
+        initialArr = tempArr
+        return formateArrData(initialArr, name, newArr)
+    } else {
+        return newArr
+    }
+}
+
+//时间选择
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
+function getDateArrayBefore(date){//获取时间数组
+    var darray = {};
+    darray.year = date.year;
+    darray.month = date.month - 1 - 6;
+    var day = date.date;
+    darray.date = day ;  //-1
+    if(day==1){
+        darray.month = date.month - 2;
+        if(darray.month==3||darray.month==7||darray.month==8||darray.month==10){
+            darray.date = 30;
+        }else if(darray.month==1){
+            darray.year%4==0?darray.date = 29:darray.date = 28
+        }else {
+            darray.date = 31;
+        }
+
+    }
+    darray.hours = date.hours;
+    darray.minutes = date.minutes;
+    darray.seconds = date.seconds;
+    return darray;
+}
+
+function getDateArray(date){//获取时间数组
+    var darray = {};
+    if(date.month  + 5 > 12){
+        darray.year = date.year + 1;
+        darray.month = date.month  + 5 -12;
+    }else {
+        darray.year = date.year;
+        darray.month = date.month  + 5;
+    }
+
+    var day = date.date;
+    /*if(date.hours == 0 && date.minutes == 0 && date.seconds == 0){
+        day = day + 1;
+    }else{
+        darray.hours = date.hours;
+        darray.minutes = date.minutes;
+        darray.seconds = date.seconds;
+    }*/
+    darray.date = day ;  //+1
+    darray.hours = date.hours;
+    darray.minutes = date.minutes;
+    darray.seconds = date.seconds;
+    var darrayMsS = `${darray.year}/${darray.month+1}/${darray.date} ${darray.hours}:${darray.minutes}:${darray.seconds}`
+    var darrayMs = (new Date(darrayMsS)).getTime();
+    if(darrayMs>new Date().getTime()){
+        darray = {
+            year:new Date().getFullYear(),
+            month:new Date().getMonth(),
+            date:new Date().getDate(),
+            hours:new Date().getHours(),
+            minutes:new Date().getMinutes(),
+            seconds:new Date().getSeconds()
+        }
+    }
+    //console.log(darrayMs)
+    return darray;
+}

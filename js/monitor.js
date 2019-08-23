@@ -7,6 +7,17 @@
         A: { name: lang_data[language].A, unit: "rad", print: ['x','y'] ,id:"qingjiao"},//倾角计
     }
 
+    //设备布置图的标题
+    $('.right .one .legend>:first-child').text(lang_data[language].ta1_name)
+    $('.right .two .legend>:first-child').text(lang_data[language].ta2_name)
+
+    $('.right .one .legend .icon_0 i').text(lang_data[language].A)
+    $('.right .one .legend .icon_1 i').text(lang_data[language].C)
+    $('.right .one .legend .icon_2 i').text(lang_data[language].D)
+
+    $('.right .two .legend .icon_0 i').text(lang_data[language].A)
+    $('.right .two .legend .icon_1 i').text(lang_data[language].C)
+
     var ajaxData = {
         allDevs:{
             buildcode : '1040B0001',
@@ -47,28 +58,28 @@
         success:function (json) {
             //console.log(json)
             if(json.builds instanceof Array && json.builds !== null){
-                for(let i=0;i<json.builds.length;i++){
-                    $(`.left h2:eq(${i})>p`).text(json.builds[i].buildname)
+                for(let ai=0;ai<json.builds.length;ai++){
+                    $(`.left h2:eq(${ai})>p`).text(json.builds[ai].buildname)
                     let newArrA = []
                     //console.log(formateArrData(json.builds[i].devs, 'type', newArrA))
-                    formateArrData(json.builds[i].devs, 'type', newArrA)
+                    formateArrData(json.builds[ai].devs, 'type', newArrA)
                     //console.log(newArrA)
-                    $(`.left .layui-colla-content:eq(${i})`).empty()
+                    $(`.left .layui-colla-content:eq(${ai})`).empty()
                     //$('.layui-colla-content').empty()
                     for(let j=0;j<newArrA.length;j++){
                         //console.log(newArrA[j][0].type)
-                        $(`.left .layui-colla-content:eq(${i})`).append(`
+                        $(`.left .layui-colla-content:eq(${ai})`).append(`
                         <div class="group">
                             <p value=${newArrA[j][0].type} class="title_dev_name active">${unitName[newArrA[j][0].type].name}</p>
                             <ul></ul>
                         </div>`)
 
                         for(let k=0;k<newArrA[j].length;k++){
-                            $(`.left .layui-colla-content:eq(${i}) ul:eq(${j})`).append(`
+                            $(`.left .layui-colla-content:eq(${ai}) ul:eq(${j})`).append(`
                                 <li value=${newArrA[j][k].devcode}>${newArrA[j][k].devname}</li>
                             `)
                             //塔加标记
-                            $(`.ta_img${i+1}>:nth-child(1),.ta_img${i+1}>:nth-child(2)`).append(`
+                            $(`.ta_img${ai+1}>:nth-child(1),.ta_img${ai+1}>:nth-child(2)`).append(`
                                 <div style="width: 12px;height: 12px" class='icon_${j} icon_${j}${k}'></div>
                             `)
                         }
@@ -92,6 +103,29 @@
                         }
 
                         devData($(this).parent().siblings().attr('value'))
+                        var a1 = ($(this).attr('value').substr($(this).attr('value').length-1,1))*1
+                        var a2 = ($(this).attr('value').substr($(this).attr('value').length-3,1))
+                        switch (a2){
+                            case 'A':
+                                a2 = '0'
+                                $('.shadow>.icon_0').siblings().hide()
+                                $(`.shadow>.icon_${a2}${a1-1}`).show()
+                                console.log(`.shadow>div.icon_${a2}${a1-1}`)
+                                break
+                            case 'C':
+                                a2 = '1'
+                                $('.shadow>.icon_1').siblings().hide()
+                                $(`.shadow>.icon_${a2}${a1-1}`).show()
+                                break
+                            case 'D':
+                                a2 = '2'
+                                $('.shadow>.icon_2').siblings().hide()
+                                $(`.shadow>.icon_${a2}${a1-1}`).show()
+                                break
+                            default:
+                                a2 = null
+                        }
+
                     })
                 })
                 $('.title_dev_name').each(function (index){
@@ -101,7 +135,27 @@
                         //alert($(this).attr('value'))
                         ajaxData.devs.devicetype = $(this).attr('value')
                         devsData()
+                        //显示设备位置
+                        switch ($(this).attr('value')){
+                            case 'A':
+                                $('.shadow>div.icon_0').siblings().hide()
+                                $('.shadow>div.icon_0').show()
+                                break;
+                            case 'C':
+                                $('.shadow>div.icon_1').siblings().hide()
+                                $('.shadow>div.icon_1').show()
+                                break;
+                            case 'D':
+                                $('.shadow>div.icon_2').siblings().hide()
+                                $('.shadow>div.icon_2').show()
+                                break;
+                            default:
+                                $('.shadow>div.icon_0').hide()
+                        }
                     })
+                })
+                $('#ta1 ,#ta2').click(function () {
+                    $('.ta_img1>.shadow>div, .ta_img2>.shadow>div').hide()
                 })
 
             }else if(json.status == 5){
@@ -144,10 +198,10 @@
                 <div class="data_dev shadow">
                     <p class="btn_yue" value=${newArrA[i][0].type}>
                         <span value="day" class="layui-btn layui-btn-primary layui-btn-sm">
-                        ${lang_data[language].month}
+                            ${lang_data[language].month}
                         </span>
                         <span value="hour" class="layui-btn layui-btn-primary layui-btn-sm bg_blue">
-                        ${lang_data[language].day}
+                            ${lang_data[language].day}
                         </span>
                     </p>
                     <div id=${unitName[newArrA[i][0].type].id}></div>
@@ -311,7 +365,7 @@
                 })
             },
             error:function () {
-                layer.msg(lang_data[language].network_wrong)
+                alert("请检查您的网络")
             }
         })
     }
@@ -373,7 +427,7 @@
             data:ajaxData.dev,
             success:function (json) {
                 //console.log(json)
-                if(json){
+                if(json.data.length>1){
                     var xData = []
                     var devName = []
                     var cDev = []
@@ -406,7 +460,7 @@
         })
     }
 
-
+    //监听折叠
     layui.use(['element', 'layer'], function () {
         var element = layui.element
         var layer = layui.layer
@@ -444,7 +498,6 @@
             textStyle: { fontSize : 30 , color: '#444' },
             effectOption: {backgroundColor: 'rgba(0, 0, 0, 0)'}
         })
-
         options = null;
         options = {
             tooltip:{
@@ -503,10 +556,8 @@
         }
 
         if (options && typeof options === "object") {
-            setTimeout(()=>{
-                myChart.setOption(options, true)
-                myChart.hideLoading()
-            },0)
+            myChart.setOption(options, true)
+            myChart.hideLoading()
         }
 
     }
@@ -549,15 +600,6 @@
         }
     }
 
-    function qingjiaoji(currentValue) {
-        return currentValue.type == "A"
-    }
-    function liefengji(currentValue) {
-        return currentValue.type == "C"
-    }
-    function jingliyi(currentValue) {
-        return currentValue.type == "D"
-    }
 })(window)
 
 

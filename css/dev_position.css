@@ -1,11 +1,219 @@
 /*设备位置定位*/
-.ta_img1>.shadow{
+
+.ta_img1>.shadow, .ta_img2>.shadow{
     position: relative;
 }
-.ta_img1>.shadow>div{
+.ta_img1>.shadow>div, .ta_img2>.shadow>div{
     position: absolute;
+    display: none;
 }
+/*塔1侧面*/
+/*倾角*/
 .ta_img1>:nth-child(1)>.icon_00{
     top: 212px;
     left: 150px;
+}
+.ta_img1>:nth-child(1)>.icon_01{
+     top: 197px;
+     left: 187px;
+}
+/*裂缝*/
+.ta_img1>:nth-child(1)>.icon_10{
+    top: 200px;
+    left: 154px;
+}
+.ta_img1>:nth-child(1)>.icon_11{
+    top: 188px;
+    left: 203px;
+}
+.ta_img1>:nth-child(1)>.icon_12{
+    top: 210px;
+    left: 303px;
+}
+.ta_img1>:nth-child(1)>.icon_13{
+    top: 225px;
+    left: 313px;
+}
+.ta_img1>:nth-child(1)>.icon_14{
+    top: 226px;
+    left: 160px;
+}
+/*静力*/
+.ta_img1>:nth-child(1)>.icon_20{
+    top: 233px;
+    left: 100px;
+}
+.ta_img1>:nth-child(1)>.icon_21{
+    top: 229px;
+    left: 134px;
+}
+.ta_img1>:nth-child(1)>.icon_22{
+    top: 219px;
+    left: 291px;
+}
+.ta_img1>:nth-child(1)>.icon_23{
+    top: 227px;
+    left: 306px;
+}
+
+/*塔1顶视*/
+/*倾角*/
+.ta_img1>:nth-child(2)>.icon_00{
+    top: 177px;
+    left: 227px;
+}
+.ta_img1>:nth-child(2)>.icon_01{
+    top: 214px;
+    left: 180px;
+}
+/*裂缝*/
+.ta_img1>:nth-child(2)>.icon_10{
+    top: 194px;
+    left: 216px;
+}
+.ta_img1>:nth-child(2)>.icon_11{
+    top: 222px;
+    left: 163px;
+}
+.ta_img1>:nth-child(2)>.icon_12{
+    top: 201px;
+    left: 81px;
+}
+.ta_img1>:nth-child(2)>.icon_13{
+    top: 163px;
+    left: 74px;
+}
+.ta_img1>:nth-child(2)>.icon_14{
+    top: 79px;
+    left: 169px;
+}
+/*静力*/
+.ta_img1>:nth-child(2)>.icon_20{
+    top: 193px;
+    left: 248px;
+}
+.ta_img1>:nth-child(2)>.icon_21{
+    top: 239px;
+    left: 76px;
+}
+.ta_img1>:nth-child(2)>.icon_22{
+    top: 107px;
+    left: 54px;
+}
+.ta_img1>:nth-child(2)>.icon_23{
+    top: 65px;
+    left: 195px;
+}
+
+/*塔1侧面*/
+/*倾角*/
+.ta_img1>:nth-child(1)>.icon_00{
+    top: 212px;
+    left: 150px;
+}
+.ta_img1>:nth-child(1)>.icon_01{
+    top: 197px;
+    left: 187px;
+}
+/*裂缝*/
+.ta_img1>:nth-child(1)>.icon_10{
+    top: 200px;
+    left: 154px;
+}
+.ta_img1>:nth-child(1)>.icon_11{
+    top: 188px;
+    left: 203px;
+}
+.ta_img1>:nth-child(1)>.icon_12{
+    top: 210px;
+    left: 303px;
+}
+.ta_img1>:nth-child(1)>.icon_13{
+    top: 225px;
+    left: 313px;
+}
+.ta_img1>:nth-child(1)>.icon_14{
+    top: 226px;
+    left: 160px;
+}
+/*静力*/
+.ta_img1>:nth-child(1)>.icon_20{
+    top: 233px;
+    left: 100px;
+}
+.ta_img1>:nth-child(1)>.icon_21{
+    top: 229px;
+    left: 134px;
+}
+.ta_img1>:nth-child(1)>.icon_22{
+    top: 219px;
+    left: 291px;
+}
+.ta_img1>:nth-child(1)>.icon_23{
+    top: 227px;
+    left: 306px;
+}
+
+/*塔2侧视*/
+/*倾角*/
+.ta_img2>:nth-child(1)>.icon_00{
+    top: 217px;
+    left: 236px;
+}
+.ta_img2>:nth-child(1)>.icon_01{
+    top: 184px;
+    left: 79px;
+}
+/*裂缝*/
+.ta_img2>:nth-child(1)>.icon_10{
+    top: 215px;
+    left: 295px;
+}
+.ta_img2>:nth-child(1)>.icon_11{
+    top: 214px;
+    left: 163px;
+}
+.ta_img2>:nth-child(1)>.icon_12{
+    top: 205px;
+    left: 81px;
+}
+.ta_img2>:nth-child(1)>.icon_13{
+    top: 153px;
+    left: 97px;
+}
+.ta_img2>:nth-child(1)>.icon_14{
+    top: 199px;
+    left: 330px;
+}
+
+/*塔2顶视*/
+/*倾角*/
+.ta_img2>:nth-child(2)>.icon_00{
+    top: 216px;
+    left: 193px;
+}
+.ta_img2>:nth-child(2)>.icon_01{
+    top: 191px;
+    left: 128px;
+}
+/*裂缝*/
+.ta_img2>:nth-child(2)>.icon_10{
+    top: 217px;
+    left: 216px;
+}
+.ta_img2>:nth-child(2)>.icon_11{
+    top: 217px;
+    left: 161px;
+}
+.ta_img2>:nth-child(2)>.icon_12{
+    top: 207px;
+    left: 130px;
+}
+.ta_img2>:nth-child(2)>.icon_13{
+    top: 132px;
+    left: 129px;
+}
+.ta_img2>:nth-child(2)>.icon_14{
+    top: 79px;
+    left: 169px;
 }

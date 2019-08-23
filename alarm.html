@@ -64,14 +64,14 @@
                 <col>
             </colgroup>
             <thead>
-            <tr>
-                <th>序号</th>
-                <th>报警原因</th>
-                <th>报警处置</th>
-                <th>处置方案</th>
-                <th>报警时间</th>
-                <th>操作</th>
-            </tr>
+                <tr>
+                    <th>序号</th>
+                    <th>报警原因</th>
+                    <th>报警处置</th>
+                    <th>处置方案</th>
+                    <th>报警时间</th>
+                    <th>操作</th>
+                </tr>
             </thead>
             <tbody>
             <tr>
@@ -82,7 +82,7 @@
             </tr>
             </tbody>
         </table>
-        <div style="text-align: center">无数据</div>
+        <div class="content_no" style="text-align: center">无数据</div>
         <hr>
     </div>
 </body>
@@ -91,4 +91,17 @@
 <script src="./layui/layui.js"></script>
 <script src="./js/config_lang.js"></script>
 <script src="./js/header.js"></script>
+<script>
+    var language = $.cookie('language')
+    $('.content p:eq(0)').text(lang_data[language].alarm)
+    $('.content table tr:eq(0)>th:eq(0)').text(lang_data[language].number_)
+    $('.content table tr:eq(0)>th:eq(1)').text(lang_data[language].why)
+    $('.content table tr:eq(0)>th:eq(2)').text(lang_data[language].handle)
+    $('.content table tr:eq(0)>th:eq(3)').text(lang_data[language].plan)
+    $('.content table tr:eq(0)>th:eq(4)').text(lang_data[language].alarm_time)
+    $('.content table tr:eq(0)>th:eq(5)').text(lang_data[language].operation)
+    $('.content_no').text(lang_data[language].no_data)
+</script>
 </html>
+
+
