@@ -1,25 +1,29 @@
 
 var url = 'http://192.168.20.15:8280'
 var langAjax
-//获取浏览器语言
-/*var type = navigator.appName;
-if (type == "Netscape"){
-    var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
-}else{
-    var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
+
+if(!$.cookie('language')){
+    //获取浏览器语言
+    var type = navigator.appName;
+    if (type == "Netscape"){
+        var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
+    }else{
+        var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
+    }
+    var lang = lang.substr(0, 2);//获取浏览器配置语言前两位
+    if (lang == "zh"){
+        //console.log(lang);
+        langAjax = 'zh_CN'
+        //window.location.replace('url');//中文编码时打开链接
+    }else if (lang == "en"){
+        //console.log(lang);
+        langAjax = 'en_US'
+    }else{//其他语言编码时打开以下链接
+        langAjax = 'my_BU'
+        //console.log(lang);
+    }
 }
-var lang = lang.substr(0, 2);//获取浏览器配置语言前两位
-if (lang == "zh"){
-    //console.log(lang);
-    langAjax = 'zh_CN'
-    //window.location.replace('url');//中文编码时打开链接
-}else if (lang == "en"){
-    //console.log(lang);
-    langAjax = 'en_US'
-}else{//其他语言编码时打开以下链接
-    langAjax = 'my_BU'
-    //console.log(lang);
-}*/
+
 
 langAjax = $.cookie('language') ? $.cookie('language') : 'zh_CN'
 
@@ -28,6 +32,19 @@ $.cookie('language',langAjax)
 var language = $.cookie('language')
     //$.cookie('username');
     //$('.logout').text($.cookie('username')?'退出':'登录')
+if(language == 'zh_CN'){
+    $('.language>:nth-child(1)').addClass('language_btn_on')
+    $('.language>:nth-child(2)').removeClass('language_btn_on')
+    $('.language>:nth-child(3)').removeClass('language_btn_on')
+}else if(language == 'en_US'){
+    $('.language>:nth-child(2)').addClass('language_btn_on')
+    $('.language>:nth-child(1)').removeClass('language_btn_on')
+    $('.language>:nth-child(3)').removeClass('language_btn_on')
+}else if(language == 'my_MM'){
+    $('.language>:nth-child(3)').addClass('language_btn_on')
+    $('.language>:nth-child(2)').removeClass('language_btn_on')
+    $('.language>:nth-child(1)').removeClass('language_btn_on')
+}
 
 if($.cookie('username')){
     $('.user').show()
@@ -150,19 +167,25 @@ function changeLang(lang){
     if(lang == 'zh'){
         langAjax = 'zh_CN'
         $.cookie('language',langAjax)
-        //console.log($.cookie('language'))
+        $('.language>:nth-child(1)').addClass('language_btn_on')
+        $('.language>:nth-child(2)').removeClass('language_btn_on')
+        $('.language>:nth-child(3)').removeClass('language_btn_on')
         initHtml()
         location.reload()
     }else if(lang == 'en'){
         langAjax = 'en_US'
         $.cookie('language',langAjax)
-        //console.log($.cookie('language'))
+        $('.language>:nth-child(2)').addClass('language_btn_on')
+        $('.language>:nth-child(1)').removeClass('language_btn_on')
+        $('.language>:nth-child(3)').removeClass('language_btn_on')
         initHtml()
         location.reload()
     }else if(lang == 'my'){
         langAjax = 'my_MM'
         $.cookie('language',langAjax)
-        //console.log($.cookie('language'))
+        $('.language>:nth-child(3)').addClass('language_btn_on')
+        $('.language>:nth-child(2)').removeClass('language_btn_on')
+        $('.language>:nth-child(1)').removeClass('language_btn_on')
         initHtml()
         location.reload()
     }

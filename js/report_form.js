@@ -465,7 +465,7 @@
                     pixelRatio: 2,
                     backgroundColor: '#fff'
                 })
-                $(`#${id}_img`).attr('src',resultBase64)
+                $(`#${id}_img`).attr('src',`data:image/jpeg;${resultBase64}`)
                 $('.xiazai').css({visibility:'visible'})
             },2000)
         }
@@ -476,7 +476,9 @@
 
     jQuery(document).ready(function($) {
         $("a.word_export").click(function(event) {
-            $("#page_content").wordExport("报表")
+            //$("#page_content").wordExport("报表")
+            $("#page_content").wordExport(lang_data[language].title+
+                $('#start').val()+'~'+$('#end').val())
         })
     })
 

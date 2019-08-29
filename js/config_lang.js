@@ -2,7 +2,8 @@ var lang_data = {
     zh_CN:{
         title: "缅甸佛塔监测系统",
         menu: ["缅甸佛塔监测系统","监测数据","统计报表","监测报警"],
-        user: '用户名',
+        user: '用户名: ',
+        //user: '',
         username: '用户',
         password: '密码',
         login: '登录',
@@ -34,7 +35,7 @@ var lang_data = {
         ta1_name: '葛道帕林寺',
         ta2_name: '瑞山都塔',
         word:{
-            jingtu:'北京中科精图信息技术有限公司',
+            jingtu:'深圳中科天巡信息技术有限公司',
             word_1_title:'缅甸蒲甘佛塔安全监测',
             word_1_title_f:'监测报告',
             word_title1:'一、工程概况',
@@ -105,7 +106,8 @@ var lang_data = {
         title: "Pagoda Monitoring System",
         //menu: ["Myanmar Pagoda Monitoring System","Monitoring","Statement","Alarming"],
         menu: ["Pagoda System","Monitoring","Statement","Alarming"],
-        user: 'User',
+        user: 'User: ',
+        //user: '',
         username: 'Username',
         login: 'Login',
         password: 'Password',
@@ -129,6 +131,8 @@ var lang_data = {
         loading: "Data loading...",
         start_time: 'Start time',
         end_time: 'End time',
+        input_start_time:'Please enter the start time',
+        input_end_time:'Please enter the end time',
         layer_lang: 'en',
         btn_generating: 'Generating Report',
         btn_down: 'Download Report',
@@ -136,7 +140,7 @@ var lang_data = {
         ta2_name: 'SHWE SAN DAW PAGODA',
 
         word:{
-            jingtu:'Beijing Zhongke Jingtu Information Technology Co., Ltd.',
+            jingtu:'Shenzhen Zhongke Tianxun Information Technology Co., Ltd.',
             word_1_title:'Security Monitoring of Puganfo Pagoda in Myanmar',
             word_1_title_f:'Monitoring Report',
             word_title1:'I. General Situation of Engineering',
@@ -204,9 +208,10 @@ var lang_data = {
 
     //my_BU
     my_MM:{
-        title: "မြန်မာစေတီတော်စောင့်ကြည့်ရေးစနစ်က",
+        title: "Pagoda Monitoring Systemမြန်မာစေတီတော်စောင့်ကြည့်ရေးစနစ်က",
         menu: ["စောင့်ကြည့်မှုစနစ်","စောငျ့ရှောကျ","အစီရင်ခံစာပုံစံ","သတိပေးခြင်း"],
-        user: 'အသုံးပြုသူ',
+        user: 'အသုံးပြုသူ: ',
+        //user: '',
         username: 'အသုံးပြုသူ',
         password: 'စကားဝှက်ကို',
         login: 'လော့ဂ်အင်',
@@ -230,14 +235,16 @@ var lang_data = {
         loading: "ပေါ်သယ်ဆောင်...",
         start_time: 'အစပြုကိုအချိန်',
         end_time: 'အဆုံးကိုအချိန်',
+        input_start_time:'စတင်ချိန်ရိုက်ထည့်ပေးပါ',
+        input_end_time:'အဆုံးအချိန်ကိုရိုက်ထည့်ပေးပါ',
         layer_lang: 'en',
         btn_generating: 'အစီရင်ခံစာများ ',
         btn_down: 'ဒေါင်းလုပ',
-        ta1_name: '临时需改လမ်းမကြီး ဘုရားကျောင်း',
+        ta1_name: 'လမ်းမကြီး ဘုရားကျောင်း',
         ta2_name: 'ဆွစ်ဇာလန်တောင်များမျှော်စင်',
 
         word:{
-            jingtu:'Beijing Zhongke Jingtu Information Technology Co., Ltd.',
+            jingtu:'Shenzhen Zhongke Tianxun Information Technology Co., Ltd.',
             word_1_title:'Security Monitoring of Puganfo Pagoda in Myanmar',
             word_1_title_f:'Monitoring Report',
             word_title1:'I. General Situation of Engineering',

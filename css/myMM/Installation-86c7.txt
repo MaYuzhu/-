@@ -1,0 +1,11 @@
+====================================================================
+ Installation Procedure
+====================================================================
+1- Copy/Paste mm3_05-Jan-2011.ttf
+    Distination: C:\Windows\Fonts\
+2- Run "keyman_free_6-2-176-0.exe"
+3- Run "myanmar3.kmx"
+4- If you can't see Myanmar3 correctly, Start->Run->intl.cpl->Ok
+	Regional and Language Option->Languages
+	Check on First Check Box
+-------------------------------------------------------------------------------------------------------
