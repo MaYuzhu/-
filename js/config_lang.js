@@ -203,7 +203,7 @@ var lang_data = {
     },
 
     //my_BU
-    my_BU:{
+    my_MM:{
         title: "မြန်မာစေတီတော်စောင့်ကြည့်ရေးစနစ်က",
         menu: ["စောင့်ကြည့်မှုစနစ်","စောငျ့ရှောကျ","အစီရင်ခံစာပုံစံ","သတိပေးခြင်း"],
         user: 'အသုံးပြုသူ',
@@ -285,11 +285,11 @@ var lang_data = {
             word_C: 'Crack',
             word_D: 'Differential settlement',
             table1: 'Monitoring projects',
-            table2: 'MaxDevname',
-            table3: 'MaxValue',
-            table4: 'AccumulativeMaxDevname',
-            table5: 'AccumulativeMaxValue',
-            table6: 'ChangeRate',
+            table2: 'Max Devname',
+            table3: 'Max Value',
+            table4: 'Accumulative MaxDevname',
+            table5: 'Accumulative MaxValue',
+            table6: 'Change Rate',
             table7: 'Remarks',
 
         },

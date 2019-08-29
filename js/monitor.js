@@ -1,6 +1,12 @@
 
 (function (w) {
     var language = $.cookie('language')
+    if(!$.cookie('username')) {
+        layer.msg(lang_data[language].msg_no_login)
+        location.href = './index.html'
+    }
+
+    //console.log($.cookie('language'))
     var unitName = {
         D: { name: lang_data[language].D, unit: "mm", print: ['a', 'b'] ,id:"jingli"},//静力水准仪
         C: { name: lang_data[language].C, unit: "mm", print: ['val_x'] ,id:"liefeng"},//裂缝计

@@ -1,6 +1,10 @@
 (function (w) {
 
     var language = $.cookie('language')
+    if(!$.cookie('username')) {
+        layer.msg(lang_data[language].msg_no_login)
+        location.href = './index.html'
+    }
 
     //html文字
     $('.date_form i:eq(0)').text(lang_data[language].start_time)
@@ -244,26 +248,26 @@
                     The rate of change is as follows:${json['1040B0002'].crackGauges.dayChangeRate}。
                     See Table 3-1 and Table 3-2 for details.`)
                     }else {
-                        $('.maxValue').text(`本次监测周期内，葛道帕林寺、瑞山都塔各监测项目均无异常，
-                    其中葛道帕林寺：
-                    差异沉降累计变化值最大测点为${json['1040B0001'].staticForce.accumulativeMaxDevname}点，
-                    累计变化值为${json['1040B0001'].staticForce.accumulativeMaxValue}，
-                    其变化速率为${json['1040B0001'].staticForce.dayChangeRate}；
-                    倾斜累计变化值最大测点为${json['1040B0001'].dipAngle.accumulativeMaxDevname}点，
-                    累计变化值为${json['1040B0001'].dipAngle.accumulativeMaxValue}，
-                    其变化速率为${json['1040B0001'].dipAngle.dayChangeRate}；
-                    裂缝累计变化值最大测点为${json['1040B0001'].crackGauges.accumulativeMaxDevname}点，
-                    累计变化值为${json['1040B0001'].crackGauges.accumulativeMaxValue}，
-                    其变化速率为${json['1040B0001'].crackGauges.dayChangeRate}。
+                        $('.maxValue').text(`During the monitoring period, there were no abnormalities in the monitoring items of Goldoparin Temple and Ruishan Duta.
+                    Among them, the Golden Palin Temple：
+                    The maximum measuring point of cumulative variation of differential settlement is${json['1040B0001'].staticForce.accumulativeMaxDevname}place，
+                    Cumulative change value${json['1040B0001'].staticForce.accumulativeMaxValue}，
+                    The rate of change is as follows:${json['1040B0001'].staticForce.dayChangeRate}；
+                    The maximum measuring point of the cumulative change value of inclination is${json['1040B0001'].dipAngle.accumulativeMaxDevname}place，
+                    Cumulative change value${json['1040B0001'].dipAngle.accumulativeMaxValue}，
+                    The rate of change is${json['1040B0001'].dipAngle.dayChangeRate}；
+                    The maximum measuring point of the cumulative change value of cracks is${json['1040B0001'].crackGauges.accumulativeMaxDevname}place，
+                    Cumulative change value${json['1040B0001'].crackGauges.accumulativeMaxValue}，
+                    The rate of change is as follows:${json['1040B0001'].crackGauges.dayChangeRate}。
                     
-                    瑞山都塔：
-                    倾斜累计变化值最大测点为${json['1040B0002'].dipAngle.accumulativeMaxDevname}点，
-                    累计变化值为${json['1040B0002'].dipAngle.accumulativeMaxValue}，
-                    其变化速率为${json['1040B0002'].dipAngle.dayChangeRate}；
-                    裂缝累计变化值最大测点为${json['1040B0002'].crackGauges.accumulativeMaxDevname}点，
-                    累计变化值为${json['1040B0002'].crackGauges.accumulativeMaxValue}，
-                    其变化速率为${json['1040B0002'].crackGauges.dayChangeRate}。
-                    详见表3-1、表3-2`)
+                    SHWE SAN DAW PAGODA：
+                    The maximum measuring point of the cumulative change value of inclination is${json['1040B0002'].dipAngle.accumulativeMaxDevname}place，
+                    Cumulative change value${json['1040B0002'].dipAngle.accumulativeMaxValue}，
+                    The rate of change is as follows:${json['1040B0002'].dipAngle.dayChangeRate}；
+                    The maximum measuring point of the cumulative change value of cracks is${json['1040B0002'].crackGauges.accumulativeMaxDevname}place，
+                    Cumulative change value${json['1040B0002'].crackGauges.accumulativeMaxValue}，
+                    The rate of change is as follows:${json['1040B0002'].crackGauges.dayChangeRate}。
+                    See Table 3-1 and Table 3-2 for details.`)
                     }
                     /*$('.maxValue').text(`本次监测周期内，葛道帕林寺、瑞山都塔各监测项目均无异常，
                     其中葛道帕林寺：

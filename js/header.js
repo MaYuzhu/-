@@ -1,24 +1,9 @@
 
-//var url = 'http://36.110.66.217:9090'
 var url = 'http://192.168.20.15:8280'
-
+var langAjax
 //获取浏览器语言
-var type = navigator.appName;
-
-var langAjax = $.cookie('language')?$.cookie('language'):'zh_CN'
-
-$.cookie('language',langAjax,{ path: '/'})
-    //$.cookie('username');
-    //$('.logout').text($.cookie('username')?'退出':'登录')
-
-if($.cookie('username')){
-    $('.user').show()
-    $('.user span').text($.cookie('username'))
-}else{
-    $('.user').hide()
-}
-
-/*if (type == "Netscape"){
+/*var type = navigator.appName;
+if (type == "Netscape"){
     var lang = navigator.language;//获取浏览器配置语言，支持非IE浏览器
 }else{
     var lang = navigator.userLanguage;//获取浏览器配置语言，支持IE5+ == navigator.systemLanguage
@@ -32,13 +17,34 @@ if (lang == "zh"){
     //console.log(lang);
     langAjax = 'en_US'
 }else{//其他语言编码时打开以下链接
-    console.log(lang);
+    langAjax = 'my_BU'
+    //console.log(lang);
 }*/
+
+langAjax = $.cookie('language') ? $.cookie('language') : 'zh_CN'
+
+$.cookie('language',langAjax)
+
+var language = $.cookie('language')
+    //$.cookie('username');
+    //$('.logout').text($.cookie('username')?'退出':'登录')
+
+if($.cookie('username')){
+    $('.user').show()
+    $('.user span').text($.cookie('username'))
+}else{
+    $('.user').hide()
+}
+
+
 initHtml()
+
 function initHtml() {
-    $.cookie('language',langAjax,{ path: '/'})
-    var language = $.cookie('language')
+    //$.cookie('language',langAjax)
+    //var language = $.cookie('language')
+    //console.log($.cookie('language'),$.cookie('username'))
     document.title = lang_data[language].title    //# 设置title的值。
+
     //设置导航栏
     for(let i=0;i<lang_data[language].menu.length;i++){
         $('.header_left').find(`i:eq(${i})`).text(lang_data[language].menu[i])
@@ -51,7 +57,6 @@ function initHtml() {
 
 //跳转前判断是否登录
 function isLogin(){
-    var language = $.cookie('language')
     if(!$.cookie('username')) {
         layer.msg(lang_data[language].msg_no_login)
         return false;
@@ -59,6 +64,7 @@ function isLogin(){
     return true;
 }
 
+//登录
 layui.use(['layer', 'form'], function(){
     var layer = layui.layer
         ,form = layui.form;
@@ -100,12 +106,12 @@ layui.use(['layer', 'form'], function(){
                         async:false,
                         cache:false,
                         dataType:'jsonp',
-                        data:{username:username,password:pwd,language:langAjax},
+                        data:{username:username,password:pwd,language:language},
                         success:function (res) {
                             //console.log(res)
                             if(res.status===1){
                                 layer.msg(lang_data[language].login_right,{time: 2000})
-                                $.cookie('username',res.username,{ path: '/'}) //language:'en_US'
+                                $.cookie('username',res.username,{ path: '/'})
                                 setTimeout(function () {
                                     location.reload()
                                 },2000)
@@ -143,14 +149,20 @@ function changeLang(lang){
     //console.log(lang)
     if(lang == 'zh'){
         langAjax = 'zh_CN'
+        $.cookie('language',langAjax)
+        //console.log($.cookie('language'))
         initHtml()
         location.reload()
     }else if(lang == 'en'){
         langAjax = 'en_US'
+        $.cookie('language',langAjax)
+        //console.log($.cookie('language'))
         initHtml()
         location.reload()
     }else if(lang == 'my'){
-        langAjax = 'my_BU'
+        langAjax = 'my_MM'
+        $.cookie('language',langAjax)
+        //console.log($.cookie('language'))
         initHtml()
         location.reload()
     }

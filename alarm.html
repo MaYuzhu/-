@@ -93,6 +93,12 @@
 <script src="./js/header.js"></script>
 <script>
     var language = $.cookie('language')
+
+    if(!$.cookie('username')) {
+        layer.msg(lang_data[language].msg_no_login)
+        location.href = './index.html'
+    }
+
     $('.content p:eq(0)').text(lang_data[language].alarm)
     $('.content table tr:eq(0)>th:eq(0)').text(lang_data[language].number_)
     $('.content table tr:eq(0)>th:eq(1)').text(lang_data[language].why)
