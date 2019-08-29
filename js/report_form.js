@@ -2,7 +2,6 @@
 
     var language = $.cookie('language')
     if(!$.cookie('username')) {
-        layer.msg(lang_data[language].msg_no_login)
         location.href = './index.html'
     }
 
