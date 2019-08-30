@@ -1,5 +1,6 @@
 
-var url = 'http://192.168.20.15:8280'
+//var url = 'http://192.168.20.15:8280'
+var url = 'http://36.110.66.216:8280'
 var langAjax
 
 if(!$.cookie('language')){
