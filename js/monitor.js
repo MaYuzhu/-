@@ -2,6 +2,7 @@
 (function (w) {
     var language = $.cookie('language')
     if(!$.cookie('username')) {
+        //alert('$.cookie("username")')
         location.href = './index.html'
     }
 
@@ -166,7 +167,9 @@
             }else if(json.status == 5){
                 //layer.msg("没有登录或登录超时,请重新登录")
                 layer.msg(lang_data[language].msg_no_login)
-                location.href = './index.html'
+                $.cookie('username','',{ path: '/'})
+                setTimeout(()=>{location.href = './index.html'},2000)
+
             }
         },
         error:function () {
@@ -192,7 +195,7 @@
                 //console.log(json)
                 let newArrA = []
                 formateArrData(json, 'type', newArrA)
-                //console.log(newArrA)
+                console.log(newArrA)
                 var xData = []
                 var devName = []
                 var cData = []

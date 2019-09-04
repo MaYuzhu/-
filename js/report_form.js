@@ -2,6 +2,7 @@
 
     var language = $.cookie('language')
     if(!$.cookie('username')) {
+        //alert('$.cookie("username")')
         location.href = './index.html'
     }
 
@@ -167,8 +168,11 @@
             layer.msg(lang_data[language].input_end_time)
             return
         }
-        $('#page_content').show()
-        $('.page1>:nth-child(4)').text($('#end').val().replace(/-/g," / "))
+        if($('#start').val() == $('#end').val()){
+            layer.msg(lang_data[language].input_min_time)
+            return
+        }
+
         var startTime = $('#start').val() + ' 00:00:00'
         var endTime = $('#end').val() + ' 00:00:00'
         //console.log(startTime,endTime)
@@ -176,6 +180,9 @@
         devs.endtime = endTime
 
         ajaxMax(startTime,endTime)
+
+        /*$('#page_content').show()
+        $('.page1>:nth-child(4)').text($('#end').val().replace(/-/g," / "))*/
 
         ajaxAllDevs('1040B0001',"A","q1")
         ajaxAllDevs('1040B0001',"C","l1")
@@ -320,9 +327,13 @@
                     $('.ta2 tr:eq(2)>td:eq(4)').text(json['1040B0002'].crackGauges.accumulativeMaxValue)
                     $('.ta2 tr:eq(2)>td:eq(5)').text(json['1040B0002'].crackGauges.dayChangeRate)
 
+                    $('#page_content').show()
+                    $('.page1>:nth-child(4)').text($('#end').val().replace(/-/g," / "))
+
                 }else if(json.status == 5){
                     layer.msg(lang_data[language].msg_no_login)
-                    location.href = './index.html'
+                    $.cookie('username','',{ path: '/'})
+                    setTimeout(()=>{location.href = './index.html'},2000)
                 }else {
                     layer.msg(lang_data[language].no_data)
                 }
@@ -330,6 +341,7 @@
             },
             error:function () {
                 layer.msg(lang_data[language].network_wrong)
+                return false
             }
         })
     }
