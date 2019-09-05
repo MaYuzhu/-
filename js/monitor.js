@@ -3,13 +3,13 @@
     var language = $.cookie('language')
     if(!$.cookie('username')) {
         //alert('$.cookie("username")')
-        location.href = './index.html'
+        setTimeout(()=>{location.href = './index.html'},2000)
     }
 
     //console.log($.cookie('language'))
     var unitName = {
         D: { name: lang_data[language].D, unit: "mm", print: ['a', 'b'] ,id:"jingli"},//静力水准仪
-        C: { name: lang_data[language].C, unit: "mm", print: ['val_x'] ,id:"liefeng"},//裂缝计
+        C: { name: lang_data[language].C, unit: "mm", print: ['x'] ,id:"liefeng"},//裂缝计
         A: { name: lang_data[language].A, unit: "rad", print: ['x','y'] ,id:"qingjiao"},//倾角计
     }
 
@@ -116,7 +116,7 @@
                                 a2 = '0'
                                 $('.shadow>.icon_0').siblings().hide()
                                 $(`.shadow>.icon_${a2}${a1-1}`).show()
-                                console.log(`.shadow>div.icon_${a2}${a1-1}`)
+                                //console.log(`.shadow>div.icon_${a2}${a1-1}`)
                                 break
                             case 'C':
                                 a2 = '1'
@@ -167,7 +167,7 @@
             }else if(json.status == 5){
                 //layer.msg("没有登录或登录超时,请重新登录")
                 layer.msg(lang_data[language].msg_no_login)
-                $.cookie('username','',{ path: '/'})
+                $.removeCookie('username',{ path: '/'})
                 setTimeout(()=>{location.href = './index.html'},2000)
 
             }
@@ -195,7 +195,7 @@
                 //console.log(json)
                 let newArrA = []
                 formateArrData(json, 'type', newArrA)
-                console.log(newArrA)
+                //console.log(newArrA)
                 var xData = []
                 var devName = []
                 var cData = []
@@ -227,17 +227,40 @@
                     }
                     for(let k=0;k<newArrA[i].length;k++){
                         for(let m=0;m<unitName[newArrA[i][0].type].print.length;m++){
+                            //devNameJly.push(newArrA[i][k].devname +'-'+ unitName[newArrA[i][0].type].print[m])
                             devNameJly.push(newArrA[i][k].devname +'-'+ unitName[newArrA[i][0].type].print[m])
                             var data_a = []
                             for(let l=0;l<newArrA[i][k].data.length;l++){
                                 data_a.push(newArrA[i][k].data[l].data[unitName[newArrA[i][0].type].print[m]])
                             }
-                            cJly.push({
+                            if(unitName[newArrA[i][0].type].print[m]=='a'){
+                                cJly.push({
+                                    name:newArrA[i][k].devalias +(k+1)+':J'+ newArrA[i][k].devname.match(/\d+/g)[0], //newArrA[i][k].devname.substring(0,6),
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[newArrA[i][0].type].print[m],
+                                    data:data_a,
+                                })
+                            }else if(unitName[newArrA[i][0].type].print[m]=='b'){
+                                cJly.push({
+                                    name:newArrA[i][k].devalias +(k+1)+':J'+ newArrA[i][k].devname.match(/\d+/g)[1],
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[newArrA[i][0].type].print[m],
+                                    data:data_a,
+                                })
+                            }else {
+                                cJly.push({
+                                    name:newArrA[i][k].devname  +'-'+ unitName[newArrA[i][0].type].print[m],
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[newArrA[i][0].type].print[m],
+                                    data:data_a,
+                                })
+                            }
+                            /*cJly.push({
                                 name:newArrA[i][k].devname  +'-'+ unitName[newArrA[i][0].type].print[m],
                                 type: 'line',
                                 stack:'总量' + k + unitName[newArrA[i][0].type].print[m],
                                 data:data_a,
-                            })
+                            })*/
                         }
                     }
                     devName.push(xDataJly)

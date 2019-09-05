@@ -3,7 +3,7 @@
     var language = $.cookie('language')
     if(!$.cookie('username')) {
         //alert('$.cookie("username")')
-        location.href = './index.html'
+        setTimeout(()=>{location.href = './index.html'},2000)
     }
 
     //html文字
@@ -332,7 +332,7 @@
 
                 }else if(json.status == 5){
                     layer.msg(lang_data[language].msg_no_login)
-                    $.cookie('username','',{ path: '/'})
+                    $.removeCookie('username',{ path: '/'})
                     setTimeout(()=>{location.href = './index.html'},2000)
                 }else {
                     layer.msg(lang_data[language].no_data)
