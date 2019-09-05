@@ -429,16 +429,38 @@
                             for(let l=0;l<json[k].data.length;l++){
                                 data_a.push(json[k].data[l].data[unitName[json[k].type].print[m]])
                             }
-                            cJly.push({
+                            if(unitName[json[0].type].print[m]=='a'){
+                                cJly.push({
+                                    name:json[k].devalias +(k+1)+':J'+ json[k].devname.match(/\d+/g)[0], //newArrA[i][k].devname.substring(0,6),
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[json[0].type].print[m],
+                                    data:data_a,
+                                })
+                            }else if(unitName[json[0].type].print[m]=='b'){
+                                cJly.push({
+                                    name:json[k].devalias +(k+1)+':J'+ json[k].devname.match(/\d+/g)[1],
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[json[0].type].print[m],
+                                    data:data_a,
+                                })
+                            }else {
+                                cJly.push({
+                                    name:json[k].devname  +'-'+ unitName[json[k].type].print[m],
+                                    type: 'line',
+                                    stack:'总量' + k + unitName[json[k].type].print[m],
+                                    data:data_a,
+                                })
+                            }
+                            /*cJly.push({
                                 name:json[k].devname  +'-'+ unitName[json[k].type].print[m],
                                 type: 'line',
                                 stack:'总量' + k + unitName[json[k].type].print[m],
                                 data:data_a,
-                            })
+                            })*/
                         }
                     }
 
-                    createEchart({legendArr:devNameJly,xAxisArr:xDataJly,seriesArr:cJly,
+                    createEchart({legendArr:null,xAxisArr:xDataJly,seriesArr:cJly,
                         id:unitName[json[0].type].id,unit:unitName[json[0].type].unit})
                 }
 
@@ -471,14 +493,36 @@
                         for(let l=0;l<json.data.length;l++){
                             data_a.push(json.data[l].data[unitName[json.type].print[m]])
                         }
-                        cDev.push({
+                        if(unitName[json.type].print[m]=='a'){
+                            cDev.push({
+                                name:json.devalias +'J'+ json.devname.match(/\d+/g)[0], //newArrA[i][k].devname.substring(0,6),
+                                type: 'line',
+                                stack:'总量' + m + unitName[json.type].print[m],
+                                data:data_a,
+                            })
+                        }else if(unitName[json.type].print[m]=='b'){
+                            cDev.push({
+                                name:json.devalias +'J'+ json.devname.match(/\d+/g)[1],
+                                type: 'line',
+                                stack:'总量' + m + unitName[json.type].print[m],
+                                data:data_a,
+                            })
+                        }else {
+                            cDev.push({
+                                name:json.devname  +'-'+ unitName[json.type].print[m],
+                                type: 'line',
+                                stack:'总量' + m + unitName[json.type].print[m],
+                                data:data_a,
+                            })
+                        }
+                        /*cDev.push({
                             name:json.devname  +'-'+ unitName[json.type].print[m],
                             type: 'line',
                             stack:'总量' + m + unitName[json.type].print[m],
                             data:data_a,
-                        })
+                        })*/
                     }
-                    createEchart({legendArr:devName,xAxisArr:xData,seriesArr:cDev,
+                    createEchart({legendArr:null,xAxisArr:xData,seriesArr:cDev,
                         id:unitName[id].id,unit:unitName[json.type].unit})
                 }else {
                     layer.msg(lang_data[language].no_data)
